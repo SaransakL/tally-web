@@ -3,61 +3,328 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ตั้งค่าการนับคะแนน</title>
+
 <style>
-@import url(https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap);
-*{box-sizing:border-box;font-family: 'Sarabun';}body{margin:0;background:#f5f6f7;color:#171c1a;font-family:Arial,"Noto Sans Thai",sans-serif}
-.wrap{width:min(700px,92%);margin:70px auto}.card{background:#fff;border:1px solid #d9ddda;border-radius:18px;padding:28px;box-shadow:0 8px 30px #0000000a}
-h1{margin:0 0 8px}.sub{color:#68706d;margin:0 0 25px}
-.form{display:flex;gap:10px}.form input{flex:1;min-width:0;padding:14px;border:1px solid #cfd5d2;border-radius:10px;font-size:16px}
-button{border:0;border-radius:10px;padding:13px 17px;font-size:15px;cursor:pointer}
-.primary{background:#5b8075;color:white}.light{background:#eef1ef}.danger{background:#f1dddd;color:#9d3030}
-.list{margin:20px 0;display:flex;flex-direction:column;gap:8px}.item{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:#f4f6f5;border-radius:10px}
-.item span{font-size:17px}.empty{color:#777;text-align:center;padding:25px;border:2px dashed #d5dad7;border-radius:10px}
-.actions{display:flex;gap:10px;margin-top:22px}.actions button{flex:1}.hint{font-size:13px;color:#727976;margin-top:12px}
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@100;200;300;400;500;600;700;800&display=swap');
+
+*{
+    box-sizing:border-box;
+    font-family:'Sarabun',sans-serif;
+}
+
+body{
+    margin:0;
+    background:#f5f6f7;
+    color:#171c1a;
+}
+
+.wrap{
+    width:min(700px,92%);
+    margin:70px auto;
+}
+
+.card{
+    background:#fff;
+    border:1px solid #d9ddda;
+    border-radius:18px;
+    padding:28px;
+    box-shadow:0 8px 30px #0000000a;
+}
+
+h1{
+    margin:0 0 8px;
+}
+
+.sub{
+    color:#68706d;
+    margin:0 0 25px;
+}
+
+.form{
+    display:flex;
+    gap:10px;
+}
+
+.form input{
+    flex:1;
+    min-width:0;
+    padding:14px;
+    border:1px solid #cfd5d2;
+    border-radius:10px;
+    font-size:16px;
+    outline:none;
+}
+
+.form input:focus{
+    border-color:#5b8075;
+    box-shadow:0 0 0 3px #5b807522;
+}
+
+button{
+    border:0;
+    border-radius:10px;
+    padding:13px 17px;
+    font-size:15px;
+    cursor:pointer;
+}
+
+.primary{
+    background:#5b8075;
+    color:white;
+}
+
+.light{
+    background:#eef1ef;
+}
+
+.danger{
+    background:#f1dddd;
+    color:#9d3030;
+}
+
+.list{
+    margin:20px 0;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 14px;
+    background:#f4f6f5;
+    border-radius:10px;
+}
+
+.item span{
+    font-size:17px;
+}
+
+.empty{
+    color:#777;
+    text-align:center;
+    padding:25px;
+    border:2px dashed #d5dad7;
+    border-radius:10px;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+    margin-top:22px;
+}
+
+.actions button{
+    flex:1;
+}
+
+.hint{
+    font-size:13px;
+    color:#727976;
+    margin-top:12px;
+}
+
+@media(max-width:600px){
+    .wrap{
+        margin:30px auto;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .form{
+        flex-direction:column;
+    }
+
+    .actions{
+        flex-direction:column;
+    }
+}
 </style>
 </head>
+
 <body>
+
 <div class="wrap">
-<div class="card">
-<h1>ตั้งค่ารายชื่อ</h1>
-<p class="sub">เพิ่มรายชื่อก่อนเข้าสู่หน้าสำหรับนับคะแนน</p>
-<div class="form">
-<input id="name" placeholder="ชื่อจริง นามสกุล" maxlength="100" autofocus>
-<button class="primary" onclick="add()">+ เพิ่มรายชื่อ</button>
+
+    <div class="card">
+
+        <h1>ตั้งค่ารายชื่อ</h1>
+
+        <p class="sub">
+            เพิ่มรายชื่อก่อนเข้าสู่หน้าสำหรับนับคะแนน
+        </p>
+
+        <div class="form">
+            <input
+                id="name"
+                placeholder="ชื่อจริง นามสกุล"
+                maxlength="100"
+                autofocus
+            >
+
+            <button class="primary" onclick="add()">
+                + เพิ่มรายชื่อ
+            </button>
+        </div>
+
+        <div id="list" class="list"></div>
+
+        <div class="actions">
+            <button class="light" onclick="clearNames()">
+                ล้างรายชื่อ
+            </button>
+
+            <button class="primary" onclick="start()">
+                เริ่มนับคะแนน →
+            </button>
+        </div>
+
+    <div>
+
 </div>
-<div id="list" class="list"></div>
-<div class="actions">
-<button class="light" onclick="clearNames()">ล้างรายชื่อ</button>
-<button class="primary" onclick="start()">เริ่มนับคะแนน →</button>
-</div>
-</div>
-</div>
+
 <script>
-const KEY="tally-web-v2";
-let people=JSON.parse(localStorage.getItem(KEY)||"[]");
-function save(){localStorage.setItem(KEY,JSON.stringify(people))}
+
+const KEY = "tally-web-v2";
+
+let people = JSON.parse(
+    localStorage.getItem(KEY) || "[]"
+);
+
+function save(){
+    localStorage.setItem(
+        KEY,
+        JSON.stringify(people)
+    );
+}
+
 function add(){
- const el=document.getElementById("name"),name=el.value.trim();
- if(!name)return;
- people.push({name,count:0});el.value="";save();render();el.focus();
+
+    const el = document.getElementById("name");
+
+    const name = el.value.trim();
+
+    if(!name){
+        el.focus();
+        return;
+    }
+
+    people.push({
+        name:name,
+        count:0
+    });
+
+    el.value = "";
+
+    save();
+    render();
+
+    el.focus();
 }
-function remove(i){people.splice(i,1);save();render()}
+
+function remove(i){
+
+    people.splice(i,1);
+
+    save();
+    render();
+}
+
 function clearNames(){
- if(!people.length)return;
- if(confirm("ล้างรายชื่อทั้งหมดใช่หรือไม่?")){people=[];save();render()}
+
+    if(!people.length){
+        return;
+    }
+
+    if(confirm("ล้างรายชื่อทั้งหมดใช่หรือไม่?")){
+
+        people = [];
+
+        save();
+        render();
+    }
 }
+
 function start(){
- if(!people.length){alert("กรุณาเพิ่มอย่างน้อย 1 รายชื่อ");return}
- location.href="counter.html";
+
+    if(!people.length){
+
+        alert("กรุณาเพิ่มอย่างน้อย 1 รายชื่อ");
+
+        return;
+    }
+
+    location.href = "counter.html";
 }
-function esc(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+
+function esc(s){
+
+    return s.replace(
+        /[&<>"']/g,
+        c => ({
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#039;"
+        }[c])
+    );
+}
+
 function render(){
- const el=document.getElementById("list");
- el.innerHTML=people.length?people.map((p,i)=>`<div class="item"><span>${i+1}. ${esc(p.name)}</span><button class="danger" onclick="remove(${i})">ลบ</button></div>`).join(""):`<div class="empty">ยังไม่มีรายชื่อ</div>`;
+
+    const el = document.getElementById("list");
+
+    if(!people.length){
+
+        el.innerHTML = `
+            <div class="empty">
+                ยังไม่มีรายชื่อ
+            </div>
+        `;
+
+        return;
+    }
+
+    el.innerHTML = people.map((p,i) => `
+
+        <div class="item">
+
+            <span>
+                ${i + 1}. ${esc(p.name)}
+            </span>
+
+            <button
+                class="danger"
+                onclick="remove(${i})"
+            >
+                ลบ
+            </button>
+
+        </div>
+
+    `).join("");
 }
-document.getElementById("name").addEventListener("keydown",e=>{if(e.key==="Enter")add()});
+
+document
+    .getElementById("name")
+    .addEventListener("keydown", e => {
+
+        if(e.key === "Enter"){
+            add();
+        }
+
+    });
+
 render();
+
 </script>
+
 </body>
 </html>

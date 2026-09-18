@@ -1,69 +1,608 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1.0"
+>
+
 <title>นับคะแนน</title>
+
 <style>
-@import url(https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap);
-*{box-sizing:border-box;font-family: 'Sarabun';}body{margin:0;background:#fff;color:#111;font-family:Arial,"Noto Sans Thai",sans-serif}
-.top{width:min(1200px,94%);margin:28px auto 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-h1{margin:0;font-size:28px}.buttons{display:flex;gap:8px}
-button{border:0;border-radius:9px;padding:10px 14px;cursor:pointer;font-size:14px}.back{background:#eef1ef}.reset{background:#f1dddd;color:#9d3030}
-.wrap{width:min(1200px,94%);margin:auto;overflow-x:auto}
-table{width:100%;border-collapse:collapse;table-layout:fixed;min-width:760px}
-th,td{border:2px solid #111}th{height:58px;font-size:17px;background:#fafafa}td{height:150px}
-.no{width:85px;text-align:center;font-size:20px}.name{width:250px;padding:0 20px;font-size:21px}
-.tally{padding:20px 28px;vertical-align:middle;cursor:pointer;user-select:none}.tally:hover{background:#fafcfb}
-.total{width:100px;text-align:center;font-size:26px;font-weight:bold}
-.clickhint{text-align:center;font-size:12px;color:#777;margin-top:12px}
-.marks{display:flex;flex-wrap:wrap;align-items:center;gap:16px;min-height:60px}
-.group{position:relative;display:inline-flex;height:58px;width:52px;align-items:flex-start;justify-content:space-between;padding:2px 3px}
-.v{display:block;width:4px;height:54px;background:#111;border-radius:3px}
-.diag{position:absolute;left:1px;top:25px;width:58px;height:4px;background:#111;border-radius:3px;transform:rotate(-62deg);transform-origin:center}
-.single{font-size:48px;line-height:1}
-@media(max-width:700px){.top{margin-top:18px}.name{width:190px}.tally{padding:14px}.marks{gap:10px}}
+
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@100;200;300;400;500;600;700;800&display=swap');
+
+*{
+    box-sizing:border-box;
+    font-family:'Sarabun',sans-serif;
+}
+
+body{
+    margin:0;
+    background:#fff;
+    color:#111;
+}
+
+/* =========================
+   TOP
+========================= */
+
+.top{
+    width:min(1200px,94%);
+    margin:28px auto 16px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.buttons{
+    display:flex;
+    gap:8px;
+}
+
+button{
+    border:0;
+    border-radius:9px;
+    padding:10px 14px;
+
+    cursor:pointer;
+    font-size:14px;
+}
+
+.back{
+    background:#eef1ef;
+    color: #111;
+}
+
+.reset{
+    background:#f1dddd;
+    color:#9d3030;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.wrap{
+    width:min(1200px,94%);
+    margin:auto;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+
+    min-width:760px;
+}
+
+th,
+td{
+    border:2px solid #111;
+}
+
+th{
+    height:58px;
+
+    font-size:21px;
+
+    background:#fafafa;
+}
+
+td{
+    height:150px;
+}
+
+.no{
+    width:85px;
+    text-align:center;
+    font-size:21px;
+}
+
+.name{
+    width:350px;
+    padding:0 20px;
+    font-size:21px;
+}
+
+.tally{
+    padding:20px 28px;
+
+    vertical-align:middle;
+
+    cursor:pointer;
+    user-select:none;
+}
+
+.tally:hover{
+    background:#f5f5f5;
+}
+
+.tally:active{
+    background:#f0f0f0;
+}
+
+.total{
+    width:100px;
+
+    text-align:center;
+
+    font-size:21px;
+    font-weight:bold;
+}
+
+/* =========================
+   TALLY MARKS
+========================= */
+
+.marks{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    align-items:center;
+
+    gap:10px;
+
+    min-height:64px;
+}
+
+/*
+    กลุ่ม 5 ขีด
+
+    │ │ │ │
+      ╲
+*/
+
+.group{
+
+    position:relative;
+
+    display:inline-block;
+
+    width:54px;
+    height:58px;
+
+    flex:none;
+}
+
+/* ขีดแนวตั้ง */
+
+.v{
+
+    position:absolute;
+
+    top:2px;
+
+    width:4px;
+    height:54px;
+
+    background:#111;
+
+    border-radius:2px;
+}
+
+/* ตำแหน่ง 4 ขีด */
+
+.group .v:nth-child(1){
+    left:3px;
+}
+
+.group .v:nth-child(2){
+    left:15px;
+}
+
+.group .v:nth-child(3){
+    left:27px;
+}
+
+.group .v:nth-child(4){
+    left:39px;
+}
+
+/* ขีดที่ 5 — เส้นทแยง */
+
+.diag{
+
+    position:absolute;
+
+    z-index:2;
+
+    left:-2px;
+    top:27px;
+
+    width:58px;
+    height:4px;
+
+    background:#ff0000;
+
+    border-radius:2px;
+
+    transform:rotate(-30deg);
+
+    transform-origin:center;
+}
+
+/* เศษ 1-4 */
+
+.single{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    height:58px;
+}
+
+.single i{
+
+    display:block;
+
+    width:4px;
+    height:54px;
+
+    background:#111;
+
+    border-radius:2px;
+}
+
+/* ไม่มีคะแนน */
+
+.no-mark{
+
+    color:#aaa;
+
+    font-size:30px;
+
+    line-height:1;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+    .top{
+        margin-top:18px;
+    }
+
+    .name{
+        width:190px;
+    }
+
+    .tally{
+        padding:14px;
+    }
+
+    .marks{
+        gap:12px;
+    }
+
+}
+
 </style>
+
 </head>
+
 <body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <div class="top">
-<h1>ตารางนับคะแนน</h1>
-<div class="buttons">
-<button class="back" onclick="location.href='index.html'">← แก้ไขรายชื่อ</button>
-<button class="reset" onclick="resetCounts()">ล้างคะแนน</button>
+
+    <div class="buttons">
+
+        <button
+            class="back"
+            onclick="location.href='index.html'"
+        >
+            ← แก้ไขรายชื่อ
+        </button>
+
+        <button
+            class="reset"
+            onclick="resetCounts()"
+        >
+            ล้างคะแนน
+        </button>
+
+    </div>
+
 </div>
-</div>
+
+
+<!-- =========================
+     TABLE
+========================= -->
+
 <div class="wrap">
+
 <table>
-<thead><tr><th class="no">ลำดับ</th><th class="name">ชื่อ</th><th>ขีดนับ</th><th class="total">รวม</th></tr></thead>
+
+<thead>
+
+<tr>
+
+    <th class="no">
+        ลำดับ
+    </th>
+
+    <th class="name">
+        ชื่อ
+    </th>
+
+    <th>
+        ขีดนับ
+    </th>
+
+    <th class="total">
+        รวม
+    </th>
+
+</tr>
+
+</thead>
+
 <tbody id="rows"></tbody>
+
 </table>
+
 </div>
+
+
 <script>
-const KEY="tally-web-v2";
-let people=JSON.parse(localStorage.getItem(KEY)||"[]");
-function save(){localStorage.setItem(KEY,JSON.stringify(people))}
-function add(i){people[i].count++;save();render()}
+
+const KEY = "tally-web-v2";
+
+let people = JSON.parse(
+    localStorage.getItem(KEY) || "[]"
+);
+
+
+/* =========================
+   SAVE
+========================= */
+
+function save(){
+
+    localStorage.setItem(
+        KEY,
+        JSON.stringify(people)
+    );
+
+}
+
+
+/* =========================
+   ADD SCORE
+========================= */
+
+function add(i){
+
+    people[i].count++;
+
+    save();
+
+    render();
+
+}
+
+
+/* =========================
+   RESET SCORE
+========================= */
+
 function resetCounts(){
- if(confirm("ต้องการล้างคะแนนทั้งหมดใช่หรือไม่?")){people.forEach(p=>p.count=0);save();render()}
+
+    if(
+        confirm(
+            "ต้องการล้างคะแนนทั้งหมดใช่หรือไม่?"
+        )
+    ){
+
+        people.forEach(
+            p => p.count = 0
+        );
+
+        save();
+
+        render();
+    }
+
 }
+
+
+/* =========================
+   CREATE TALLY MARKS
+========================= */
+
 function marks(n){
- let groups=Math.floor(n/5),rest=n%5,out="";
- for(let i=0;i<groups;i++)out+=`<span class="group"><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="diag"></i></span>`;
- if(rest)out+=`<span class="single">${"│".repeat(rest)}</span>`;
- return out||'<span style="color:#aaa;font-size:30px">—</span>';
+
+    /*
+        ทุก 5 คะแนน =
+
+        │ │ │ │
+        ╲
+
+        คะแนนที่เหลือ 1-4
+        แสดงเป็นขีดธรรมดา
+    */
+
+    const groups = Math.floor(n / 5);
+
+    const rest = n % 5;
+
+    let out = "";
+
+
+    /* =====================
+       ชุดละ 5
+    ===================== */
+
+    for(let i = 0; i < groups; i++){
+
+        out += `
+
+            <span class="group">
+
+                <i class="v"></i>
+                <i class="v"></i>
+                <i class="v"></i>
+                <i class="v"></i>
+
+                <i class="diag"></i>
+
+            </span>
+
+        `;
+
+    }
+
+
+    /* =====================
+       เศษ 1-4
+    ===================== */
+
+    if(rest > 0){
+
+        out += `
+            <span class="single">
+        `;
+
+        for(let i = 0; i < rest; i++){
+
+            out += `
+                <i></i>
+            `;
+
+        }
+
+        out += `
+            </span>
+        `;
+
+    }
+
+
+    /* =====================
+       ไม่มีคะแนน
+    ===================== */
+
+    if(n === 0){
+
+        return `
+            <span class="no-mark">
+                
+            </span>
+        `;
+
+    }
+
+
+    return out;
+
 }
-function esc(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function esc(s){
+
+    return s.replace(
+        /[&<>"']/g,
+
+        c => ({
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#039;"
+        }[c])
+    );
+
+}
+
+
+/* =========================
+   RENDER TABLE
+========================= */
+
 function render(){
- const rows=document.getElementById("rows");
- rows.innerHTML=people.map((p,i)=>`<tr>
- <td class="no">${i+1}</td>
- <td class="name">${esc(p.name)}</td>
- <td class="tally" onclick="add(${i})"><div class="marks">${marks(p.count)}</div></td>
- <td class="total">${p.count}</td>
- </tr>`).join("");
+
+    const rows =
+        document.getElementById("rows");
+
+
+    rows.innerHTML = people.map(
+        (p,i) => `
+
+        <tr>
+
+            <td class="no">
+                ${i + 1}
+            </td>
+
+            <td class="name">
+                ${esc(p.name)}
+            </td>
+
+            <td
+                class="tally"
+                onclick="add(${i})"
+                title="คลิกเพื่อเพิ่มคะแนน"
+            >
+
+                <div class="marks">
+
+                    ${marks(p.count)}
+
+                </div>
+
+            </td>
+
+            <td class="total">
+                ${p.count}
+            </td>
+
+        </tr>
+
+        `
+    ).join("");
+
 }
-if(!people.length)location.href="index.html";else render();
+
+
+/* =========================
+   CHECK PEOPLE
+========================= */
+
+if(!people.length){
+
+    location.href = "index.html";
+
+}else{
+
+    render();
+
+}
+
 </script>
+
 </body>
 </html>
