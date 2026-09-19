@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
 
 <meta charset="UTF-8">
@@ -58,7 +59,7 @@ button{
 
 .back{
     background:#eef1ef;
-    color: #111;
+    color:#111;
 }
 
 .reset{
@@ -73,12 +74,15 @@ button{
 .wrap{
     width:min(1200px,94%);
     margin:auto;
+
     overflow-x:auto;
 }
 
 table{
     width:100%;
+
     border-collapse:collapse;
+
     table-layout:fixed;
 
     min-width:760px;
@@ -98,18 +102,26 @@ th{
 }
 
 td{
-    height:150px;
+    height:100px;
 }
+
+/* =========================
+   COLUMNS
+========================= */
 
 .no{
     width:85px;
+
     text-align:center;
+
     font-size:21px;
 }
 
 .name{
     width:350px;
+
     padding:0 20px;
+
     font-size:21px;
 }
 
@@ -119,6 +131,7 @@ td{
     vertical-align:middle;
 
     cursor:pointer;
+
     user-select:none;
 }
 
@@ -136,7 +149,47 @@ td{
     text-align:center;
 
     font-size:21px;
+
     font-weight:bold;
+}
+
+/* =========================
+   SCORE CONTROL
+========================= */
+
+.score-control{
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+}
+
+.minus{
+    flex:none;
+
+    width:38px;
+    height:38px;
+
+    padding:0;
+
+    background:#f1dddd;
+
+    color:#9d3030;
+
+    font-size:23px;
+
+    font-weight:bold;
+
+    border-radius:8px;
+}
+
+.minus:hover{
+    background:#e8caca;
+}
+
+.minus:active{
+    transform:scale(.95);
 }
 
 /* =========================
@@ -154,14 +207,12 @@ td{
     gap:10px;
 
     min-height:64px;
+
 }
 
-/*
-    กลุ่ม 5 ขีด
-
-    │ │ │ │
-      ╲
-*/
+/* =========================
+   GROUP OF 5
+========================= */
 
 .group{
 
@@ -170,12 +221,14 @@ td{
     display:inline-block;
 
     width:54px;
+
     height:58px;
 
     flex:none;
+
 }
 
-/* ขีดแนวตั้ง */
+/* vertical */
 
 .v{
 
@@ -184,14 +237,14 @@ td{
     top:2px;
 
     width:4px;
+
     height:54px;
 
     background:#111;
 
     border-radius:2px;
-}
 
-/* ตำแหน่ง 4 ขีด */
+}
 
 .group .v:nth-child(1){
     left:3px;
@@ -209,7 +262,7 @@ td{
     left:39px;
 }
 
-/* ขีดที่ 5 — เส้นทแยง */
+/* diagonal */
 
 .diag{
 
@@ -218,9 +271,11 @@ td{
     z-index:2;
 
     left:-2px;
+
     top:27px;
 
     width:58px;
+
     height:4px;
 
     background:#ff0000;
@@ -230,9 +285,12 @@ td{
     transform:rotate(-30deg);
 
     transform-origin:center;
+
 }
 
-/* เศษ 1-4 */
+/* =========================
+   SINGLE MARK
+========================= */
 
 .single{
 
@@ -243,6 +301,7 @@ td{
     gap:8px;
 
     height:58px;
+
 }
 
 .single i{
@@ -250,14 +309,18 @@ td{
     display:block;
 
     width:4px;
+
     height:54px;
 
     background:#111;
 
     border-radius:2px;
+
 }
 
-/* ไม่มีคะแนน */
+/* =========================
+   NO MARK
+========================= */
 
 .no-mark{
 
@@ -266,6 +329,37 @@ td{
     font-size:30px;
 
     line-height:1;
+
+}
+
+/* =========================
+   SPECIAL ROWS
+========================= */
+
+.special-row td{
+
+    background:#fafafa;
+
+}
+
+.special-name{
+
+    font-size:21px;
+
+    padding:0 20px;
+
+}
+
+.special-row .tally{
+
+    background:#fafafa;
+
+}
+
+.special-row .tally:hover{
+
+    background:#f1f1f1;
+
 }
 
 /* =========================
@@ -292,11 +386,97 @@ td{
 
 }
 
+
+.summary{
+    background:#111;
+    color:#fff;
+}
+.summary:hover{ background:#333; }
+
+#pdfReport{
+    position:fixed;
+    left:-100000px;
+    top:0;
+    width:794px;
+    background:#fff;
+    color:#111;
+    padding:42px 48px;
+    z-index:-1;
+}
+
+.pdf-title{
+    text-align:center;
+    margin:0 0 6px;
+    font-size:30px;
+    font-weight:700;
+}
+
+.pdf-date{
+    text-align:center;
+    color:#666;
+    margin-bottom:24px;
+    font-size:15px;
+}
+
+.pdf-table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+}
+
+.pdf-table th,
+.pdf-table td{
+    border:1.5px solid #111;
+    padding:8px 10px;
+    font-size:15px;
+    height:auto;
+}
+
+.pdf-table th{
+    background:#f2f2f2;
+    font-weight:700;
+}
+
+.pdf-center{
+    text-align:center;
+}
+
+.pdf-total{
+    margin-top:18px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.pdf-box{
+    border:1.5px solid #111;
+    text-align:center;
+    padding:10px;
+}
+
+.pdf-box small{
+    display:block;
+    color:#666;
+}
+
+.pdf-box strong{
+    font-size:23px;
+}
+
+.pdf-close{
+    display:none;
+}
+
 </style>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
+
 <body>
+
 
 <!-- =========================
      HEADER
@@ -311,6 +491,13 @@ td{
             onclick="location.href='index.html'"
         >
             ← แก้ไขรายชื่อ
+        </button>
+
+        <button
+            class="summary"
+            onclick="showSummary()"
+        >
+            📄 สรุปเป็น PDF
         </button>
 
         <button
@@ -357,16 +544,169 @@ td{
 
 </thead>
 
+
 <tbody id="rows"></tbody>
+
+
+<!-- =========================
+     SPECIAL ROWS
+========================= -->
+
+<tbody>
+
+<!-- งดออกเสียง -->
+
+<tr class="special-row">
+
+    <td class="no">
+        -
+    </td>
+
+    <td class="special-name">
+        งดออกเสียง
+    </td>
+
+    <td
+        class="tally"
+        onclick="addSpecial('abstain')"
+        title="คลิกเพื่อเพิ่มคะแนน"
+    >
+
+        <div class="score-control">
+
+            <button
+                class="minus"
+                onclick="
+                    event.stopPropagation();
+                    subtractSpecial('abstain')
+                "
+                title="ลดคะแนน"
+            >
+                −
+            </button>
+
+            <div
+                class="marks"
+                id="marks-abstain"
+            ></div>
+
+        </div>
+
+    </td>
+
+    <td
+        class="total"
+        id="total-abstain"
+    >
+        0
+    </td>
+
+</tr>
+
+
+<!-- ไม่ลงคะแนนเสียง -->
+
+<tr class="special-row">
+
+    <td class="no">
+        -
+    </td>
+
+    <td class="special-name">
+        ไม่ลงคะแนนเสียง
+    </td>
+
+    <td
+        class="tally"
+        onclick="addSpecial('novote')"
+        title="คลิกเพื่อเพิ่มคะแนน"
+    >
+
+        <div class="score-control">
+
+            <button
+                class="minus"
+                onclick="
+                    event.stopPropagation();
+                    subtractSpecial('novote')
+                "
+                title="ลดคะแนน"
+            >
+                −
+            </button>
+
+            <div
+                class="marks"
+                id="marks-novote"
+            ></div>
+
+        </div>
+
+    </td>
+
+    <td
+        class="total"
+        id="total-novote"
+    >
+        0
+    </td>
+
+</tr>
+
+</tbody>
 
 </table>
 
 </div>
 
 
+
+<div id="pdfReport">
+    <h1 class="pdf-title">สรุปผลการนับคะแนน</h1>
+    <div class="pdf-date" id="pdfDate"></div>
+
+    <table class="pdf-table">
+        <thead>
+            <tr>
+                <th style="width:60px">ลำดับ</th>
+                <th>ชื่อ</th>
+                <th style="width:100px">คะแนน</th>
+                <th style="width:110px">ร้อยละ</th>
+            </tr>
+        </thead>
+        <tbody id="pdfRows"></tbody>
+    </table>
+
+    <div class="pdf-total">
+        <div class="pdf-box">
+            <small>รวมคะแนนตัวเลือก</small>
+            <strong id="pdfCandidateTotal">0</strong>
+        </div>
+        <div class="pdf-box">
+            <small>งดออกเสียง</small>
+            <strong id="pdfAbstain">0</strong>
+        </div>
+        <div class="pdf-box">
+            <small>ไม่ลงคะแนนเสียง</small>
+            <strong id="pdfNoVote">0</strong>
+        </div>
+    </div>
+</div>
+
 <script>
 
+/* =========================
+   STORAGE
+========================= */
+
 const KEY = "tally-web-v2";
+
+const SPECIAL_KEY = "tally-special-v1";
+
+
+/* =========================
+   PEOPLE
+========================= */
 
 let people = JSON.parse(
     localStorage.getItem(KEY) || "[]"
@@ -374,7 +714,17 @@ let people = JSON.parse(
 
 
 /* =========================
-   SAVE
+   SPECIAL SCORES
+========================= */
+
+let special = JSON.parse(
+    localStorage.getItem(SPECIAL_KEY)
+    || '{"abstain":0,"novote":0}'
+);
+
+
+/* =========================
+   SAVE PEOPLE
 ========================= */
 
 function save(){
@@ -388,7 +738,21 @@ function save(){
 
 
 /* =========================
-   ADD SCORE
+   SAVE SPECIAL
+========================= */
+
+function saveSpecial(){
+
+    localStorage.setItem(
+        SPECIAL_KEY,
+        JSON.stringify(special)
+    );
+
+}
+
+
+/* =========================
+   ADD PEOPLE SCORE
 ========================= */
 
 function add(i){
@@ -403,25 +767,100 @@ function add(i){
 
 
 /* =========================
-   RESET SCORE
+   SUBTRACT PEOPLE SCORE
+========================= */
+
+function subtract(i){
+
+    if(people[i].count <= 0){
+
+        return;
+
+    }
+
+    people[i].count--;
+
+    save();
+
+    render();
+
+}
+
+
+/* =========================
+   ADD SPECIAL
+========================= */
+
+function addSpecial(type){
+
+    special[type]++;
+
+    saveSpecial();
+
+    renderSpecial();
+
+}
+
+
+/* =========================
+   SUBTRACT SPECIAL
+========================= */
+
+function subtractSpecial(type){
+
+    if(special[type] <= 0){
+
+        return;
+
+    }
+
+    special[type]--;
+
+    saveSpecial();
+
+    renderSpecial();
+
+}
+
+
+/* =========================
+   RESET ALL
 ========================= */
 
 function resetCounts(){
 
     if(
-        confirm(
+        !confirm(
             "ต้องการล้างคะแนนทั้งหมดใช่หรือไม่?"
         )
     ){
 
-        people.forEach(
-            p => p.count = 0
-        );
+        return;
 
-        save();
-
-        render();
     }
+
+
+    /* รายชื่อ */
+
+    people.forEach(
+        p => p.count = 0
+    );
+
+
+    /* งด / ไม่ลงคะแนน */
+
+    special.abstain = 0;
+
+    special.novote = 0;
+
+
+    save();
+
+    saveSpecial();
+
+    render();
+
+    renderSpecial();
 
 }
 
@@ -432,36 +871,35 @@ function resetCounts(){
 
 function marks(n){
 
-    /*
-        ทุก 5 คะแนน =
+    const groups =
+        Math.floor(n / 5);
 
-        │ │ │ │
-        ╲
-
-        คะแนนที่เหลือ 1-4
-        แสดงเป็นขีดธรรมดา
-    */
-
-    const groups = Math.floor(n / 5);
-
-    const rest = n % 5;
+    const rest =
+        n % 5;
 
     let out = "";
 
 
     /* =====================
-       ชุดละ 5
+       GROUP OF 5
     ===================== */
 
-    for(let i = 0; i < groups; i++){
+    for(
+        let i = 0;
+        i < groups;
+        i++
+    ){
 
         out += `
 
             <span class="group">
 
                 <i class="v"></i>
+
                 <i class="v"></i>
+
                 <i class="v"></i>
+
                 <i class="v"></i>
 
                 <i class="diag"></i>
@@ -474,40 +912,54 @@ function marks(n){
 
 
     /* =====================
-       เศษ 1-4
+       REST
     ===================== */
 
     if(rest > 0){
 
         out += `
+
             <span class="single">
+
         `;
 
-        for(let i = 0; i < rest; i++){
+
+        for(
+            let i = 0;
+            i < rest;
+            i++
+        ){
 
             out += `
+
                 <i></i>
+
             `;
 
         }
 
+
         out += `
+
             </span>
+
         `;
 
     }
 
 
     /* =====================
-       ไม่มีคะแนน
+       ZERO
     ===================== */
 
     if(n === 0){
 
         return `
+
             <span class="no-mark">
-                
+                —
             </span>
+
         `;
 
     }
@@ -524,23 +976,31 @@ function marks(n){
 
 function esc(s){
 
-    return s.replace(
+    return String(s).replace(
+
         /[&<>"']/g,
 
         c => ({
+
             "&":"&amp;",
+
             "<":"&lt;",
+
             ">":"&gt;",
+
             '"':"&quot;",
+
             "'":"&#039;"
+
         }[c])
+
     );
 
 }
 
 
 /* =========================
-   RENDER TABLE
+   RENDER PEOPLE
 ========================= */
 
 function render(){
@@ -550,17 +1010,24 @@ function render(){
 
 
     rows.innerHTML = people.map(
+
         (p,i) => `
 
         <tr>
 
             <td class="no">
+
                 ${i + 1}
+
             </td>
 
+
             <td class="name">
+
                 ${esc(p.name)}
+
             </td>
+
 
             <td
                 class="tally"
@@ -568,28 +1035,80 @@ function render(){
                 title="คลิกเพื่อเพิ่มคะแนน"
             >
 
-                <div class="marks">
+                <div class="score-control">
 
-                    ${marks(p.count)}
+                    <button
+                        class="minus"
+                        onclick="
+                            event.stopPropagation();
+                            subtract(${i})
+                        "
+                        title="ลดคะแนน"
+                    >
+                        −
+                    </button>
+
+
+                    <div class="marks">
+
+                        ${marks(p.count)}
+
+                    </div>
 
                 </div>
 
             </td>
 
+
             <td class="total">
+
                 ${p.count}
+
             </td>
 
         </tr>
 
         `
+
     ).join("");
 
 }
 
 
 /* =========================
-   CHECK PEOPLE
+   RENDER SPECIAL
+========================= */
+
+function renderSpecial(){
+
+    document.getElementById(
+        "marks-abstain"
+    ).innerHTML =
+        marks(special.abstain);
+
+
+    document.getElementById(
+        "total-abstain"
+    ).textContent =
+        special.abstain;
+
+
+    document.getElementById(
+        "marks-novote"
+    ).innerHTML =
+        marks(special.novote);
+
+
+    document.getElementById(
+        "total-novote"
+    ).textContent =
+        special.novote;
+
+}
+
+
+/* =========================
+   CHECK DATA
 ========================= */
 
 if(!people.length){
@@ -598,11 +1117,204 @@ if(!people.length){
 
 }else{
 
+
+    /* รองรับข้อมูลเดิม */
+
+    people.forEach(p => {
+
+        if(
+            typeof p.count !== "number"
+        ){
+
+            p.count = 0;
+
+        }
+
+    });
+
+
+    if(
+        typeof special.abstain !== "number"
+    ){
+
+        special.abstain = 0;
+
+    }
+
+
+    if(
+        typeof special.novote !== "number"
+    ){
+
+        special.novote = 0;
+
+    }
+
+
+    save();
+
+    saveSpecial();
+
+
     render();
 
+    renderSpecial();
+
+}
+
+
+/* =========================
+   PDF SUMMARY
+========================= */
+
+async function showSummary(){
+
+    if(typeof html2canvas === "undefined" ||
+       typeof window.jspdf === "undefined"){
+        alert("ไม่สามารถโหลดระบบสร้าง PDF ได้ กรุณาเชื่อมต่ออินเทอร์เน็ตแล้วลองใหม่");
+        return;
+    }
+
+    const report = document.getElementById("pdfReport");
+    const rows = document.getElementById("pdfRows");
+
+    const candidateTotal = people.reduce(
+        (sum,p) => sum + (Number(p.count) || 0), 0
+    );
+
+    const abstain = Number(special.abstain) || 0;
+    const novote = Number(special.novote) || 0;
+    const total = candidateTotal + abstain + novote;
+
+    const sorted = [...people].sort(
+        (a,b) => (Number(b.count)||0) - (Number(a.count)||0)
+    );
+
+    rows.innerHTML = sorted.map((p,i) => {
+
+        const score = Number(p.count) || 0;
+        const percent = total
+            ? ((score / total) * 100).toFixed(2)
+            : "0.00";
+
+        return `
+            <tr>
+                <td class="pdf-center">${i + 1}</td>
+                <td>${esc(p.name)}</td>
+                <td class="pdf-center">${score}</td>
+                <td class="pdf-center">${percent}%</td>
+            </tr>
+        `;
+    }).join("");
+
+    const now = new Date();
+
+    document.getElementById("pdfDate").textContent =
+        "จัดทำเมื่อ " +
+        now.toLocaleDateString("th-TH", {
+            year:"numeric",
+            month:"long",
+            day:"numeric"
+        }) +
+        " เวลา " +
+        now.toLocaleTimeString("th-TH", {
+            hour:"2-digit",
+            minute:"2-digit"
+        }) + " น.";
+
+    document.getElementById("pdfCandidateTotal").textContent = candidateTotal;
+    document.getElementById("pdfAbstain").textContent = abstain;
+    document.getElementById("pdfNoVote").textContent = novote;
+
+    // Temporarily place it on-screen so html2canvas can render it reliably.
+    report.style.position = "absolute";
+    report.style.left = "0";
+    report.style.top = "0";
+    report.style.zIndex = "99999";
+
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    try{
+
+        const canvas = await html2canvas(report,{
+            scale:2,
+            backgroundColor:"#ffffff",
+            useCORS:true,
+            logging:false
+        });
+
+        const { jsPDF } = window.jspdf;
+
+        const pdf = new jsPDF({
+            orientation:"portrait",
+            unit:"mm",
+            format:"a4",
+            compress:true
+        });
+
+        const pageW = 210;
+        const pageH = 297;
+        const margin = 8;
+        const usableW = pageW - margin * 2;
+        const usableH = pageH - margin * 2;
+
+        const imgData = canvas.toDataURL("image/jpeg",0.95);
+        const imgW = usableW;
+        const imgH = canvas.height * imgW / canvas.width;
+
+        let remaining = imgH;
+        let y = margin;
+
+        pdf.addImage(
+            imgData,
+            "JPEG",
+            margin,
+            y,
+            imgW,
+            imgH
+        );
+
+        remaining -= usableH;
+
+        while(remaining > 0){
+
+            pdf.addPage();
+
+            y = margin - (imgH - remaining);
+
+            pdf.addImage(
+                imgData,
+                "JPEG",
+                margin,
+                y,
+                imgW,
+                imgH
+            );
+
+            remaining -= usableH;
+        }
+
+        const date = new Date().toISOString().slice(0,10);
+
+        pdf.save("สรุปผลการนับคะแนน-" + date + ".pdf");
+
+    }catch(error){
+
+        console.error(error);
+
+        alert("สร้าง PDF ไม่สำเร็จ: " + error.message);
+
+    }finally{
+
+        report.style.position = "fixed";
+        report.style.left = "-100000px";
+        report.style.top = "0";
+        report.style.zIndex = "-1";
+    }
 }
 
 </script>
 
 </body>
+
 </html>
